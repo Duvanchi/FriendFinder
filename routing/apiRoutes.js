@@ -1,6 +1,7 @@
 // Dependency && Linking file
 var path = require("path");
 var friends = require("../app/friends.js");
+// var survey = require("../public/survey.html");
 
 // Routing
 module.exports = function(app) {
@@ -29,27 +30,29 @@ module.exports = function(app) {
 			// Right now this segment is hypothetical.
 			// Can't test because of above error
 
-			// var matchName = '';
-			// var matchImage = '';
-			// var initialDifference = 10000;
+			var matchName = '';
+			var matchImage = '';
+			var initialDifference = 10000;
 
-			// for (var i = 0; i < friends.length; i++) {
+			for (var i = 0; i < friends.length; i++) {
 
-			// 	var diff = 0;
-			// 	for (var m = 0; m < userResponses.length; m++) {
-			// 		diff += Math.abs(friends[m].scores[m] - userResponses[m]);
-			// 	}
+				var diff = 0;
+				for (var m = 0; m < userResponse.length; m++) {
+					diff += Math.abs(friends[i].scores[i] - userResponse[m]);
+				}
 
-			// 	if (diff < initialDifference) {
-			// 		difference = diff;
-			// 		matchName = friends[i].name;
-			// 		matchImage = friends[i].photo;
+				if (diff < initialDifference) {
+					difference = diff;
+					matchName = friends[i].name;
+					matchImage = friends[i].photo;
 
-			// 	}
-			// }
+				}
+			}
 
-		res.json(userInput);
+		console.log(matchName);
+		// res.json(userInput);
 		friends.push(userInput);
+		res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
 		
 	});
 };

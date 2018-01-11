@@ -129,6 +129,7 @@
 	      </div>
 	      <div class="modal-body">
 	        <h2 id="matchName"></h2>
+	        <img id="matchImg" width="500" src="">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -140,28 +141,38 @@
 
 	<script type="text/javascript">
 
+	$(document).ready(function() {
+		$('select').material_select();
+
+		$('.modal').modal({
+			dismissible: false,
+		});
+	});
+
     $("#submit").on("click", function() {
 
 	    	var userData = {
 	    		name: $("#name").val().trim(),
 	    		photo: $("#photo").val().trim(),
-	    		scores:[
+	    		scores: [
 	    					$("#q1").val().trim(), 
 	    					$("#q2").val().trim(), 
 	    					$("#q3").val().trim(), 
 	    					$("#q4").val().trim(), 
 	    					$("#q5").val().trim(), 
-	    					$("#q6").val().trim() 
+	    					$("#q6").val().trim(),
 	    				]
 	    	};
  
 	    	$.post("/api/friends", userData) 
 	    	.done(function(data) {
 
-	    		console.log(userData);
-	    		// $("#matchName").text(data.name);
-	    		// $('#matchImg').attr("src", data.photo);
-		    	// $("#resultsModal").modal('toggle');
+	    		// console.log(userData);
+	    		$("#matchName").text(data.matchName);
+	    		$('#matchImg').attr("src", data.matchImage);
+		    	$("#resultsModal").modal('toggle');
+		    	console.log(data.matchName);
+		    	console.log(data.matchImage);
 	    	});
 		});
 	
